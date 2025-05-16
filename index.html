@@ -481,11 +481,11 @@
         card.innerHTML = `
             <div class="card-body d-flex flex-column">
                 <h4 class="card-title">${title}</h4>
-                <h5 class="card-subtitle mb-2 text-muted">Target Audience: ${targetAudienceValues || '-'}</h5>
-                <h5 class="card-subtitle mb-2 text-muted"><b>Platform:</b> ${platforms || '-'}</h5>
-                <h5 class="card-subtitle mb-2 text-muted"><b>Period:</b> ${campaignPeriod || '-'}</h5>
-                <h5 class="card-subtitle mb-4 text-muted"><b>Upload Type:</b> ${uploadType || 'Not Specified'}</h5>
-                <h5 class="card-subtitle mb-2 text-muted"><b>Caption:</b></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><b>Target Audience:</b> ${targetAudienceValues || '-'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><b>Platform:</b> ${platforms || '-'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><b>Period:</b> ${campaignPeriod || '-'}</h6>
+                <h6 class="card-subtitle mb-4 text-muted"><b>Upload Type:</b> ${uploadType || 'Not Specified'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><b>Caption:</b></h6>
                 <p class="card-text" id="${captionId}">${generatedCaption}</p>
                 <button class="btn btn-info btn-sm" onclick="copyToClipboard('${captionId}')">Copy Caption</button>
             </div>
