@@ -480,12 +480,12 @@
         card.className = 'card shadow-sm h-100 w-100'; // h-100 ensures equal height for cards
         card.innerHTML = `
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Target Audience: ${targetAudienceValues || '-'}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">Platform: ${platforms || '-'}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">Period: ${campaignPeriod || '-'}</h6>
-                <h6 class="card-subtitle mb-4 text-muted">Upload Type: ${uploadType || 'Not Specified'}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">Caption:</h6>
+                <h4 class="card-title">${title}</h4>
+                <h5 class="card-subtitle mb-2 text-muted">Target Audience: ${targetAudienceValues || '-'}</h5>
+                <h5 class="card-subtitle mb-2 text-muted"><b>Platform:</b> ${platforms || '-'}</h5>
+                <h5 class="card-subtitle mb-2 text-muted"><b>Period:</b> ${campaignPeriod || '-'}</h5>
+                <h5 class="card-subtitle mb-4 text-muted"><b>Upload Type:</b> ${uploadType || 'Not Specified'}</h5>
+                <h5 class="card-subtitle mb-2 text-muted"><b>Caption:</b></h5>
                 <p class="card-text" id="${captionId}">${generatedCaption}</p>
                 <button class="btn btn-info btn-sm" onclick="copyToClipboard('${captionId}')">Copy Caption</button>
             </div>
