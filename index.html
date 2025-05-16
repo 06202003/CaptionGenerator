@@ -228,37 +228,41 @@
                                 <div class="d-flex flex-wrap gap-2 mb-3" id="customHashtagContainer"></div>
                                 <div class="row">
                                   <div class="col-md-3">
-                                    <h6>General</h6>
-                                    <div><input class="form-check-input" type="checkbox" /> #LesMusik</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #KursusMusik</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #MainMusik</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikAsik</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikCepatPaham</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikDariRumah</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikForBeginners</div>
+                                    <h6><input type="checkbox" onclick="toggleCategory(this, 'general')" /> General</h6>
+                                    <div><input class="form-check-input general" type="checkbox" /> #Music</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #MusicLessons</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #MusicCourses</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #PlayMusic</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #FunMusicLessons</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #FastMusicLearning</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #LearnMusicFromHome</div>
+                                    <div><input class="form-check-input general" type="checkbox" /> #MusicLessonsForBeginners</div>
                                   </div>
                                   <div class="col-md-3">
-                                    <h6>Guitar</h6>
-                                    <div><input class="form-check-input" type="checkbox" /> #BelajarGitar</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #FingerStyleGuitar</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LearnGuitar</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #MainGitar</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #PlayGuitar</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #SukaGitar</div>
+                                    <h6><input type="checkbox" onclick="toggleCategory(this, 'guitar')" /> Guitar</h6>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #Guitar</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #LearnGuitar</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #FingerStyleGuitar</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #GuitarLessons</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #PlayGuitar</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #GuitarPlaying</div>
+                                    <div><input class="form-check-input guitar" type="checkbox" /> #LoveGuitar</div>
                                   </div>
                                   <div class="col-md-3">
-                                    <h6>Drum</h6>
-                                    <div><input class="form-check-input" type="checkbox" /> #BelajarDrum</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LearnDrum</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #MainDrum</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #PlayDrum</div>
+                                    <h6><input type="checkbox" onclick="toggleCategory(this, 'drum')" /> Drum</h6>
+                                    <div><input class="form-check-input drum" type="checkbox" /> #Drums</div>
+                                    <div><input class="form-check-input drum" type="checkbox" /> #LearnDrums</div>
+                                    <div><input class="form-check-input drum" type="checkbox" /> #DrumLessons</div>
+                                    <div><input class="form-check-input drum" type="checkbox" /> #PlayDrums</div>
+                                    <div><input class="form-check-input drum" type="checkbox" /> #Drumming</div>
                                   </div>
                                   <div class="col-md-3">
-                                    <h6>Piano</h6>
-                                    <div><input class="form-check-input" type="checkbox" /> #BelajarPiano</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #LearnPiano</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #MainPiano</div>
-                                    <div><input class="form-check-input" type="checkbox" /> #PlayPiano</div>
+                                    <h6><input type="checkbox" onclick="toggleCategory(this, 'piano')" /> Piano</h6>
+                                    <div><input class="form-check-input piano" type="checkbox" /> #Piano</div>
+                                    <div><input class="form-check-input piano" type="checkbox" /> #LearnPiano</div>
+                                    <div><input class="form-check-input piano" type="checkbox" /> #PianoLessons</div>
+                                    <div><input class="form-check-input piano" type="checkbox" /> #PlayPiano</div>
+                                    <div><input class="form-check-input piano" type="checkbox" /> #PianoPlaying</div>
                                   </div>
                                 </div>
                                 <hr />
@@ -368,6 +372,11 @@
         }
       });
 
+      function toggleCategory(masterCheckbox, categoryClass) {
+        const isChecked = masterCheckbox.checked;
+        document.querySelectorAll(`.${categoryClass}`).forEach((checkbox) => (checkbox.checked = isChecked));
+      }
+
       function pickAllHashtags() {
         document.querySelectorAll('#collapseHashtag input[type=checkbox]').forEach((cb) => (cb.checked = true));
       }
@@ -428,8 +437,8 @@
 
         // Ambil hashtags yang dipilih
         const selectedHashtags = [];
-        document.querySelectorAll('#collapseHashtag input[type=checkbox]:checked').forEach((checkbox) => {
-          selectedHashtags.push(checkbox.parentNode.textContent.trim());
+        document.querySelectorAll('#collapseHashtag input[type=checkbox].form-check-input:checked').forEach((checkbox) => {
+          selectedHashtags.push(checkbox.nextSibling.textContent.trim());
         });
 
         // Gabungkan hashtag yang dipilih
