@@ -449,11 +449,11 @@
             <br/>
             ${caption || 'Your campaign caption goes here'}
             <br/>
-            ${hashtags ? `${hashtags.replace(/ /g, ' ')}` : '#AkuBisaMusik'}
+            ${hashtags ? `${hashtags.replace(/ /g, ' #')}` : '#AkuBisaMusik'}
         `.trim();
 
         const clipboardCaption = `
-            ${title || 'Campaign Title'}\nPeriod: ${campaignPeriod || 'Period'}\n${caption || 'Your campaign caption goes here'}\n${hashtags ? `${hashtags.replace(/ /g, ' #')}` : '#AkuBisaMusik'}
+            ${title || 'Campaign Title'}\nPeriod: ${campaignPeriod || 'Period'}\n${caption || 'Your campaign caption goes here'}\n${hashtags ? `${hashtags.replace(/ /g, ' ')}` : '#AkuBisaMusik'}
         `.trim();
 
         // Validasi minimal isi title dan caption
