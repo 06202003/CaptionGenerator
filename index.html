@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aku Suka Musik</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+  </head>
+  <style>
+    /* Wrapper Tagify agar mirip form-control */
+    .tagify {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      padding: 0.375rem 0.5rem;
+      min-height: calc(1.5em + 0.75rem + 2px);
+      background-color: white;
+      font-size: 1rem;
+    }
+
+    /* Tag block style */
+    .tagify__tag {
+      background-color: #e9ecef;
+      border-radius: 0.25rem;
+      margin: 0.125rem 0.25rem 0.125rem 0;
+      padding: 0.25em 0.5em;
+    }
+
+    /* Input di dalam Tagify */
+    .tagify__input {
+      flex: 1;
+      min-width: 150px;
+      padding: 0.375rem 0;
+      margin: 0 !important;
+      align-self: center;
+      line-height: 1.5;
+      font-size: 1rem;
+      color: #212529;
+    }
+
+    /* Placeholder agar vertikal tengah dan tidak ke atas */
+    .tagify__input::placeholder {
+      color: #6c757d;
+      opacity: 1;
+      line-height: 1.5;
+    }
+  </style>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> <img src="/img/logo.jpg" alt="Brand Name" width="60" height="60" /> AkuBisaMusik </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Music Lessons </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Guitar</a></li>
+                <li><a class="dropdown-item" href="#">Bass</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Piano</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Events</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <section>
+      <div class="container">
+        <div class="row d-flex justify-content-center align-items-center" style="min-height: 90vh">
+          <div class="col-md-5">
+            <img src="/img/main.png" alt="Brand Name" />
+          </div>
+          <div class="col-md-7">
+            <h1>Welcome to Caption Generator Tool!</h1>
+            <p>
+              Use this feature to create engaging captions for your social media campaigns. Simply enter the required information, select your target audience, and define your campaign goal. We will help you create the right content to
+              capture your audience's attention.
+            </p>
+
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel">🧾 Create New Campaign</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <!-- Campaign Title -->
+                      <div class="mb-3">
+                        <label for="campaignTitle" class="form-label">📝 Campaign Title</label>
+                        <input type="text" class="form-control" id="campaignTitle" placeholder="Enter campaign title" />
+                      </div>
+
+                      <!-- Campaign Goal -->
+                      <div class="mb-3">
+                        <label for="campaignGoal" class="form-label">🎯 Campaign Goal</label>
+                        <select class="form-select" id="campaignGoal">
+                          <option selected>Awareness</option>
+                          <option value="Engagement">Engagement</option>
+                          <option value="Conversion">Conversion</option>
+                        </select>
+                      </div>
+
+                      <!-- Target Audience -->
+                      <div class="mb-3">
+                        <label for="targetAudience" class="form-label"
+                          >👥 Target Audience
+                          <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Separate each audience with a comma (e.g., 'Students, Professionals')"></i>
+                        </label>
+                        <input id="targetAudience" placeholder="" class="form-control" />
+                      </div>
+
+                      <!-- Platform -->
+                      <div class="mb-3">
+                        <label class="form-label"><i class="fa-brands fa-instagram"></i> &nbsp;Select Platforms</label>
+                        <div class="d-flex gap-3">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="platformInstagram" />
+                            <label class="form-check-label" for="platformInstagram">Instagram</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="platformTikTok" />
+                            <label class="form-check-label" for="platformTikTok">TikTok</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="platformX" />
+                            <label class="form-check-label" for="platformX">X (Twitter)</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="platformYouTube" />
+                            <label class="form-check-label" for="platformYouTube">YouTube</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Campaign Period -->
+                      <div class="mb-3">
+                        <label for="campaignPeriod" class="form-label">📅 Campaign Period</label>
+                        <input type="text" id="campaignPeriod" class="form-control" placeholder="Select date range" />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-info w-100" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Proceed to Content</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+              <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-3">🧾 Instagram Campaign Content Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label class="form-label">🖼 Upload Type:</label><br />
+                        <div class="btn-group" role="group">
+                          <input type="radio" class="btn-check" name="uploadType" id="reels" autocomplete="off" checked />
+                          <label class="btn btn-outline-secondary" for="reels">Reels</label>
+                          <input type="radio" class="btn-check" name="uploadType" id="story" autocomplete="off" />
+                          <label class="btn btn-outline-secondary" for="story">Story</label>
+                          <input type="radio" class="btn-check" name="uploadType" id="feeds" autocomplete="off" />
+                          <label class="btn btn-outline-secondary" for="feeds">Feeds</label>
+                        </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="form-label">📁 Upload File:</label>
+                        <input type="file" class="form-control" id="uploadFile" accept="image/*,video/*" />
+                        <div id="previewContainer" class="mt-2"></div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="form-label">📝 Write Caption:</label>
+                        <textarea id="captionText" class="form-control" rows="3" placeholder="Mari belajar musik dengan cara yang menyenangkan..."></textarea>
+                      </div>
+
+                      <div class="accordion" id="hashtagAccordion">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHashtag">✍ Choose Hashtags</button>
+                          </h2>
+                          <div id="collapseHashtag" class="accordion-collapse collapse" data-bs-parent="#hashtagAccordion">
+                            <div class="accordion-body">
+                              <div class="mb-3">
+                                <input type="text" class="form-control mb-2" id="customHashtagInput" placeholder="Add your own hashtag and press Enter" />
+                                <div class="d-flex flex-wrap gap-2 mb-3" id="customHashtagContainer"></div>
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <h6>General</h6>
+                                    <div><input class="form-check-input" type="checkbox" /> #LesMusik</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #KursusMusik</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #MainMusik</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikAsik</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikCepatPaham</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikDariRumah</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LesMusikForBeginners</div>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <h6>Guitar</h6>
+                                    <div><input class="form-check-input" type="checkbox" /> #BelajarGitar</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #FingerStyleGuitar</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LearnGuitar</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #MainGitar</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #PlayGuitar</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #SukaGitar</div>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <h6>Drum</h6>
+                                    <div><input class="form-check-input" type="checkbox" /> #BelajarDrum</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LearnDrum</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #MainDrum</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #PlayDrum</div>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <h6>Piano</h6>
+                                    <div><input class="form-check-input" type="checkbox" /> #BelajarPiano</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #LearnPiano</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #MainPiano</div>
+                                    <div><input class="form-check-input" type="checkbox" /> #PlayPiano</div>
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="d-flex justify-content-between">
+                                  <button type="button" class="btn btn-outline-danger btn-sm" onclick="resetHashtags()">🔄 Reset</button>
+                                  <button type="button" class="btn btn-outline-success btn-sm" onclick="pickAllHashtags()">➕ Pick All</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">⬅ Back</button>
+                    <button type="button" class="btn btn-success" onclick="saveCampaign()">✅ Save Content</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-info" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Create New Campaign</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wave -->
+    <!-- <svg class="wave-top" viewBox="0 0 1200 300" style="background-color: rgb(234, 237, 238); margin-top: -12rem">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 108.306L50 114.323C100 120.34 200 132.374 300 168.476C400 204.578 500 264.749 600 246.698C700 228.647 800 132.374 900 108.306C1000 84.2382 1100 132.374 1150 156.442L1200 180.51V-8.5451e-06H1150C1100 -8.5451e-06 1000 -8.5451e-06 900 -8.5451e-06C800 -8.5451e-06 700 -8.5451e-06 600 -8.5451e-06C500 -8.5451e-06 400 -8.5451e-06 300 -8.5451e-06C200 -8.5451e-06 100 -8.5451e-06 50 -8.5451e-06H0V108.306Z"
+        fill="white"
+      />
+    </svg> -->
+    <!-- Wave -->
+
+    <section style="background-color: rgb(234, 237, 238)">
+      <div class="container">
+        <h1 class="text-center">Campaign</h1>
+        <div class="row" id="savedCaptionsContainer">
+          <!-- Cards will be appended here -->
+        </div>
+      </div>
+    </section>
+
+    <script src="script/anime.min.js"></script>
+    <script src="script/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+    <script>
+      let cardCounter = 0;
+      cardCounter++;
+      const captionId = `captionText${cardCounter}`;
+      var tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+
+      flatpickr('#campaignPeriod', {
+        mode: 'range',
+        dateFormat: 'Z', // dummy (we'll override display format)
+        altInput: true,
+        altFormat: 'custom', // dummy (we override via function)
+        formatDate: (date) => {
+          const day = date.getDate();
+          const month = date.toLocaleString('en-US', { month: 'long' });
+          const year = date.getFullYear();
+
+          const getOrdinal = (n) => {
+            const s = ['th', 'st', 'nd', 'rd'],
+              v = n % 100;
+            return s[(v - 20) % 10] || s[v] || s[0];
+          };
+
+          return `${day}${getOrdinal(day)} ${month} ${year}`;
+        },
+
+        onChange: function (selectedDates, dateStr, instance) {
+          if (selectedDates.length === 2) {
+            const start = instance.formatDate(selectedDates[0]);
+            const end = instance.formatDate(selectedDates[1]);
+            instance.altInput.value = `${start} - ${end}`;
+          }
+        },
+      });
+
+      new Tagify(document.querySelector('#targetAudience'));
+
+      document.getElementById('uploadFile').addEventListener('change', function (event) {
+        const preview = document.getElementById('previewContainer');
+        preview.innerHTML = '';
+        const file = event.target.files[0];
+        if (file) {
+          const url = URL.createObjectURL(file);
+          const type = file.type;
+          if (type.startsWith('image/')) {
+            preview.innerHTML = `<img src="${url}" alt="preview" class="img-fluid rounded w-25" />`;
+          } else if (type.startsWith('video/')) {
+            preview.innerHTML = `<video controls class="w-100"><source src="${url}" type="${type}"></video>`;
+          }
+        }
+      });
+
+      function pickAllHashtags() {
+        document.querySelectorAll('#collapseHashtag input[type=checkbox]').forEach((cb) => (cb.checked = true));
+      }
+
+      function resetHashtags() {
+        document.querySelectorAll('#collapseHashtag input[type=checkbox]').forEach((cb) => (cb.checked = false));
+      }
+
+      document.getElementById('customHashtagInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const tag = e.target.value.trim();
+          if (tag) {
+            const container = document.getElementById('customHashtagContainer');
+            const div = document.createElement('div');
+            div.className = 'form-check';
+            div.innerHTML = `<input type="checkbox" class="form-check-input" checked /> <label class="form-check-label">#${tag}</label>`;
+            container.appendChild(div);
+            e.target.value = '';
+          }
+        }
+      });
+
+      function saveCampaign() {
+        // Ambil data dari modal pertama
+        const title = document.getElementById('campaignTitle').value.trim();
+
+        // Ambil tagify targetAudience dan ekstrak hanya nilai (misal: "Mahasiswa")
+        const targetAudienceEl = document.getElementById('targetAudience');
+        const tagifyInstance = new Tagify(targetAudienceEl);
+        const targetAudienceValues = tagifyInstance.value.map((item) => item.value).join(', ');
+
+        console.log(targetAudienceValues);
+
+        // Ambil campaignPeriod (yang sudah ada tampilan range)
+        const campaignPeriod = document.getElementById('campaignPeriod').value.trim();
+
+        // Ambil caption dari modal kedua
+        const caption = document.getElementById('captionText').value.trim();
+
+        // Ambil platform yang dipilih
+        const selectedPlatforms = [];
+        if (document.getElementById('platformInstagram').checked) {
+          selectedPlatforms.push('Instagram');
+        }
+        if (document.getElementById('platformTikTok').checked) {
+          selectedPlatforms.push('TikTok');
+        }
+        if (document.getElementById('platformX').checked) {
+          selectedPlatforms.push('X (Twitter)');
+        }
+        if (document.getElementById('platformYouTube').checked) {
+          selectedPlatforms.push('YouTube');
+        }
+
+        // Gabungkan platform yang dipilih
+        const platforms = selectedPlatforms.join(' ');
+
+        // Ambil hashtags yang dipilih
+        const selectedHashtags = [];
+        document.querySelectorAll('#collapseHashtag input[type=checkbox]:checked').forEach((checkbox) => {
+          selectedHashtags.push(checkbox.parentNode.textContent.trim());
+        });
+
+        // Gabungkan hashtag yang dipilih
+        const hashtags = selectedHashtags.join(' ');
+
+        // Ambil Upload Type (Reels, Story, Feeds)
+        let uploadType = '';
+        if (document.getElementById('reels').checked) uploadType = 'Reels';
+        if (document.getElementById('story').checked) uploadType = 'Story';
+        if (document.getElementById('feeds').checked) uploadType = 'Feeds';
+
+        // Buat caption gabungan dengan format khusus
+        const generatedCaption = `
+            ${title || 'Campaign Title'}
+            <br/>
+            Period: ${campaignPeriod || 'Period'}
+            <br/>
+            ${caption || 'Your campaign caption goes here'}
+            <br/>
+            ${hashtags ? `${hashtags.replace(/ /g, ' #')}` : '#AkuBisaMusik'}
+        `.trim();
+
+        const clipboardCaption = `
+            ${title || 'Campaign Title'}\nPeriod: ${campaignPeriod || 'Period'}\n${caption || 'Your campaign caption goes here'}\n${hashtags ? `${hashtags.replace(/ /g, ' #')}` : '#AkuBisaMusik'}
+        `.trim();
+
+        // Validasi minimal isi title dan caption
+        // if (!title || !caption) {
+        //   alert('Please fill in Campaign Title and Caption!');
+        //   return;
+        // }
+        if (!title || !caption) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please fill in Campaign Title and Caption!',
+            confirmButtonText: 'Okay',
+          });
+          return;
+        }
+
+        // Buat card untuk tampilkan data di halaman utama
+        const container = document.getElementById('savedCaptionsContainer');
+        const colDiv = document.createElement('div');
+        colDiv.className = 'col-md-4 mb-3'; // Adjusted to col-md-3 for 4 columns per row
+
+        const card = document.createElement('div');
+        card.className = 'card shadow-sm h-100 w-100'; // h-100 ensures equal height for cards
+        card.innerHTML = `
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${title}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Target Audience: ${targetAudienceValues || '-'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Platform: ${platforms || '-'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Period: ${campaignPeriod || '-'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Upload Type: ${uploadType || 'Not Specified'}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Caption:</h6>
+                <p class="card-text" id="${captionId}">${generatedCaption}</p>
+                <button class="btn btn-info btn-sm" onclick="copyToClipboard('${captionId}')">Copy Caption</button>
+            </div>
+        `;
+
+        colDiv.appendChild(card);
+        container.prepend(colDiv); // Add the card to the container
+
+        // Copy caption ke clipboard otomatis
+        navigator.clipboard
+          .writeText(clipboardCaption)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Copied!',
+              text: 'Caption copied to clipboard.',
+              confirmButtonText: 'Okay',
+            });
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Failed!',
+              text: 'Failed to copy caption to clipboard: ' + err,
+              confirmButtonText: 'Try Again',
+            });
+          });
+
+        // Tutup modal kedua
+        const modal2 = bootstrap.Modal.getInstance(document.getElementById('exampleModalToggle2'));
+        modal2.hide();
+
+        // Opsional: tutup modal pertama juga jika mau
+        const modal1 = bootstrap.Modal.getInstance(document.getElementById('exampleModalToggle'));
+        if (modal1) modal1.hide();
+
+        // Reset Form
+        resetForm();
+      }
+
+      function copyToClipboard(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+          const text = element.innerText;
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              Swal.fire({
+                icon: 'success',
+                title: 'Copied!',
+                text: 'Caption copied to clipboard.',
+                confirmButtonText: 'Okay',
+              });
+            })
+            .catch(function (err) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Failed!',
+                text: 'Failed to copy caption to clipboard: ' + err,
+                confirmButtonText: 'Try Again',
+              });
+            });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed!',
+            text: 'Element not found! ' + err,
+            confirmButtonText: 'Try Again',
+          });
+        }
+      }
+
+      function resetForm() {
+        // Reset input fields
+        document.getElementById('campaignTitle').value = '';
+        document.getElementById('campaignGoal').selectedIndex = 0; // Reset dropdown to the first option
+        document.getElementById('targetAudience').value = ''; // Reset target audience input
+        document.getElementById('campaignPeriod').value = ''; // Reset date range input
+        document.getElementById('captionText').value = ''; // Reset caption field
+
+        // Reset hashtag selections
+        document.querySelectorAll('#collapseHashtag input[type=checkbox]').forEach((checkbox) => (checkbox.checked = false));
+
+        // Reset file upload
+        document.getElementById('uploadFile').value = ''; // Reset file input
+        document.getElementById('previewContainer').innerHTML = ''; // Clear file preview
+
+        // Optionally reset Tagify (if you're using it for target audience input)
+        const tagifyTarget = document.querySelector('#targetAudience').tagify;
+        if (tagifyTarget) tagifyTarget.removeAllTags();
+      }
+    </script>
+  </body>
+</html>
